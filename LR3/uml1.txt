@@ -1,0 +1,17 @@
+@startuml
+actor "Администратор" as owner
+boundary "Система учета" as app
+entity "База данных" as data
+actor "Команда студии" as trainee
+
+owner-> app : Заказ
+app-> data : Запись заказа
+data-> trainee : Детальный заказ
+
+owner-> app : Сохранение отзывов и нарботок
+app-> data : Запись отзывов
+data-> app : Передача отзывов на публикацию
+app-> data : Запись наработок
+data-> trainee : Передача наработок команде
+
+@enduml

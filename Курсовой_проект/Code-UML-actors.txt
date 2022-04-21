@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+hide circle
+hide methods
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Разработчик"
+actor "Пользователь_системы"
+actor "Преподаватель"
+actor "Ученик"
+actor "Модуль_обучения" 
+actor "Программный_модуль" 
+
+Модуль_обучения --> Программный_модуль
+
+
+rectangle Обучение {
+usecase case1 as "Планировать обучение"
+usecase case2 as "Управлять пользователями"
+usecase case3 as "Войти в аккаунт"
+usecase case4 as "Играть"
+usecase case5 as "Проводить обучение"
+usecase case6 as "Получать статистику"
+
+
+ Пользователь_системы <-- Преподаватель
+ Пользователь_системы <-- Ученик
+
+
+ Преподаватель -- case1
+ Преподаватель -- case2
+ Преподаватель -- case4
+ Преподаватель -- case6
+
+ Ученик -- case3
+ Ученик -- case4
+
+
+ case2 -- Разработчик
+
+ (case1) .> (case2) 
+ (case2) .> (case5)
+ (case5) .> (case6)  
+ (case3) .> (case4) 
+ (case4) .> (case6) 
+
+ case1 -- Модуль_обучения 
+ case2 -- Модуль_обучения
+ case3 -- Модуль_обучения 
+ case4 -- Модуль_обучения
+ case5 -- Модуль_обучения
+ case5 -- Модуль_обучения
+ case6 -- Модуль_обучения
+}
+@enduml

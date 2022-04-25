@@ -1,0 +1,57 @@
+@startuml
+skinparam monochrome true
+
+actor Ученик as pupil
+boundary "Интерфейс" as system
+entity "Приложение" as cam
+database "База данных " as db
+
+pupil-> system : Запуск системы
+activate system
+system -> cam : Запрос на запуск
+activate cam
+cam -> system : Подтверждение запуска
+system -> pupil : Система запущена
+
+
+pupil-> system : Вход в систему
+system -> cam : Запрос на вход
+cam -> db : Запрос на вход
+activate db
+db -> cam : Подтверждение входа
+deactivate db
+cam -> system : Запуск формы 
+system -> pupil : Открытие формы
+
+
+pupil -> system : Нажатие на запуск уровня
+system -> cam : Запрос на запуск уровня
+cam -> db : Запрос на уровень
+activate db
+db -> cam : Выдача уровня
+deactivate db
+cam -> system : Подтверждение запуска уровня
+system -> pupil : Запуск уровня
+
+loop 
+
+pupil-> system : Изменение числа
+activate system
+system -> cam : Изменение поля
+activate cam
+cam -> system : Сохранение поля
+system -> pupil : Сохранение числа
+
+end
+
+pupil-> system : Завершение уровня
+activate system
+system -> cam : Запрос на зевршение уровня
+activate cam
+cam -> system : Сохранение уровня
+system -> pupil : Результат о пройденном уровне
+
+
+deactivate cam
+deactivate system
+@enduml
